@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  app:
+    container_name: test-task-backend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      DB_NAME: testTask
+      DB_CONNECTION: mongodb://mongodb:27017/
+    ports:
+      - '3001:3001'
+    depends_on:
+      - database
+
+  database:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - '27017:27017'
